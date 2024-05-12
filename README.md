@@ -1,6 +1,12 @@
 # CPUVuMeter
 
 
+### Matériels.
+
+Vu-mètre : 
+[https://fr.aliexpress.com/item/1005003040012912.html](https://fr.aliexpress.com/item/1005003040012912.html)
+
+
 ### Installation des modules Python.
 
 ```
@@ -12,6 +18,7 @@ $ sudo pip3 install psutil
 $ pip3 install pyserial
 $ sudo pip3 install pyserial
 ```
+
 
 ### Installation des outils de monitoring et de test.
 
