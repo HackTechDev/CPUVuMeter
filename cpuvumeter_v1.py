@@ -64,7 +64,7 @@ if __name__ == "__main__":
 
         total, used, free = shutil.disk_usage("/")
         used_percentage = (used / total) * 100
-        send_pwm_value(10, map_value(used_percentage), 1, 100, 1, max_vumetre_4)
+        send_pwm_value(10, map_value(used_percentage, 1, 100, 1, max_vumetre_4))
         print(f"Disk usage: {used_percentage}%")   
         
         #send_pwm_value(11, map_value(cpu_load, 1, 100, 1, max_vumetre_5))
