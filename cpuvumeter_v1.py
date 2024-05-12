@@ -5,6 +5,7 @@ import psutil
 import serial
 import time
 import math
+import shutil
 
 serial_port = '/dev/ttyACM0'
 baud_rate = 9600
@@ -16,6 +17,8 @@ max_vumetre_0 = 150
 max_vumetre_1 = 150
 max_vumetre_2 = 150
 max_vumetre_3 = 150
+max_vumetre_4 = 150
+max_vumetre_5 = 150
 
 def get_cpu_load(cpu_number):
     cpu_loads = psutil.cpu_percent(interval=1,  percpu=True)
@@ -59,8 +62,11 @@ if __name__ == "__main__":
         print(f"CPU Load 3: {cpu_load_3}% <=> {cpu_vumetre_3}/{max_vumetre_3}")        
         send_pwm_value(9, map_value(cpu_load_3, 1, 100, 1, max_vumetre_3))
 
-
-        #send_pwm_value(10, map_value(cpu_load, 1, 100, 1, max_vumetre))
-        #send_pwm_value(11, map_value(cpu_load, 1, 100, 1, max_vumetre))
+        total, used, free = shutil.disk_usage("/")
+        used_percentage = (used / total) * 100
+        send_pwm_value(10, map_value(used_percentage), 1, 100, 1, max_vumetre_4)
+        print(f"Disk usage: {used_percentage}%")   
+        
+        #send_pwm_value(11, map_value(cpu_load, 1, 100, 1, max_vumetre_5))
 
 ser.close()
