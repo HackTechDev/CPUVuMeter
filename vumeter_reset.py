@@ -20,17 +20,11 @@ def send_pwm_value(pin, value):
  
    
 if __name__ == "__main__":
-    while True:
-        send_pwm_value(3,a  )
+  send_pwm_value(3, 0 )
+  send_pwm_value(5, 0)
+  send_pwm_value(6, 0)
+  send_pwm_value(9, 0)
+  send_pwm_value(10, 0)
+  send_pwm_value(11, 0)
 
-        send_pwm_value(5, )
-        
-        send_pwm_value(6, )
-        
-        send_pwm_value(9, )
-
-        send_pwm_value(10,)
-        
-        send_pwm_value(11, )
-
-ser.close()
+  ser.close()
