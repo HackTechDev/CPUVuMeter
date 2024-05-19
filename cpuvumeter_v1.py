@@ -20,6 +20,27 @@ max_vumetre_3 = 150
 max_vumetre_4 = 150
 max_vumetre_5 = 150
 
+def get_network_load(interval=1):
+    """Calculate network load in Kb/s."""
+    # Get initial network I/O stats
+    net_io_start = psutil.net_io_counters()
+
+    # Sleep for the interval
+    time.sleep(interval)
+
+    # Get network I/O stats after the interval
+    net_io_end = psutil.net_io_counters()
+
+    # Calculate the difference and convert bytes to kilobytes
+    bytes_sent = net_io_end.bytes_sent - net_io_start.bytes_sent
+    bytes_recv = net_io_end.bytes_recv - net_io_start.bytes_recv
+
+    kb_sent = bytes_sent / 1024
+    kb_recv = bytes_recv / 1024
+
+    return kb_sent, kb_recv
+
+
 def get_cpu_load(cpu_number):
     cpu_loads = psutil.cpu_percent(interval=1,  percpu=True)
     specific_cpu_load = cpu_loads[cpu_number]
@@ -67,6 +88,8 @@ if __name__ == "__main__":
         send_pwm_value(10, map_value(used_percentage, 1, 100, 1, max_vumetre_4))
         print(f"Disk usage: {used_percentage}%")   
         
-        #send_pwm_value(11, map_value(cpu_load, 1, 100, 1, max_vumetre_5))
+        kb_sent, kb_recv = get_network_load()
+        print(f"Kb sent: {kb_sent:.2f} Kb/s | Kb received: {kb_recv:.2f} Kb/s")
+        send_pwm_value(11, map_value(kb_recv, 1, 1000, 1, max_vumetre_5))
 
 ser.close()
