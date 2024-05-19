@@ -1,0 +1,6 @@
+
+
+Ram
+Swap
+Network: Ethernet
+ 
